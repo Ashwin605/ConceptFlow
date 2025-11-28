@@ -485,6 +485,19 @@ function drawObject(ctx, obj) {
         ctx.lineTo(obj.x, obj.y - obj.height);
         ctx.stroke();
     }
+    else if (obj.type === 'image') {
+        // Check if image is loaded in the persistent scene object
+        const persistentObj = scene.objects.find(o => o.id === obj.id);
+        if (persistentObj) {
+            if (!persistentObj._img) {
+                persistentObj._img = new Image();
+                persistentObj._img.src = obj.src;
+            }
+            if (persistentObj._img.complete) {
+                ctx.drawImage(persistentObj._img, obj.x, obj.y, obj.width, obj.height);
+            }
+        }
+    }
 
     ctx.restore();
 }

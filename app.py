@@ -48,6 +48,7 @@ TEMPLATE_BUBBLE_SORT = {
         {"id": "swap2_b", "objectId": "bar4", "type": "translate", "start": 4, "end": 5, "params": {"to": {"x": 320, "y": 350}}},
         
         # Pass 1: 8 vs 4
+
         {"id": "move_mark4", "objectId": "comp_marker", "type": "translate", "start": 5.5, "end": 6, "params": {"to": {"x": 380, "y": 360}}, "narrative": "Compare 8 and 4. 8 > 4, swap."},
         {"id": "swap3_a", "objectId": "bar3", "type": "translate", "start": 6, "end": 7, "params": {"to": {"x": 440, "y": 350}}},
         {"id": "swap3_b", "objectId": "bar5", "type": "translate", "start": 6, "end": 7, "params": {"to": {"x": 380, "y": 350}}},
@@ -65,6 +66,41 @@ TEMPLATE_BUBBLE_SORT = {
         
         # Done
         {"id": "finish", "objectId": "status", "type": "fade", "start": 11, "end": 12, "params": {"opacity": 1}, "narrative": "The array is becoming sorted."}
+    ]
+}
+
+TEMPLATE_BERNOULLI = {
+    "sceneId": "bernoulli_principle",
+    "width": 800,
+    "height": 450,
+    "duration": 10,
+    "code": "P + 0.5 * rho * v^2 + rho * g * h = Constant",
+    "objects": [
+        {"id": "bg", "type": "rect", "props": {"x": 0, "y": 0, "width": 800, "height": 450, "color": "#13111C"}},
+        {"id": "title", "type": "text", "props": {"x": 400, "y": 50, "text": "Bernoulli's Principle", "font": "bold 32px Inter", "color": "#ffffff"}},
+        
+        # Flowchart Nodes
+        {"id": "node1", "type": "rect", "props": {"x": 50, "y": 120, "width": 200, "height": 80, "color": "#1E1C29", "text": "Fluid Velocity ↑"}},
+        {"id": "node2", "type": "rect", "props": {"x": 300, "y": 120, "width": 200, "height": 80, "color": "#1E1C29", "text": "Pressure ↓"}},
+        {"id": "node3", "type": "rect", "props": {"x": 550, "y": 120, "width": 200, "height": 80, "color": "#1E1C29", "text": "Lift Force ↑"}},
+
+        # Arrows
+        {"id": "arrow1", "type": "arrow", "props": {"points": [250, 160], "width": 4, "color": "#00d2ff"}},
+        {"id": "arrow2", "type": "arrow", "props": {"points": [500, 160], "width": 4, "color": "#00d2ff"}},
+
+        # Image (Airfoil Diagram)
+        {"id": "img_wing", "type": "image", "props": {"x": 200, "y": 250, "width": 400, "height": 150, "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Airfoil_lift_minus_drag.svg/800px-Airfoil_lift_minus_drag.svg.png"}},
+        
+        # Labels
+        {"id": "label_app", "type": "text", "props": {"x": 400, "y": 420, "text": "Application: Airfoil Lift", "font": "italic 18px Inter", "color": "#89b4fa"}},
+    ],
+    "actions": [
+        {"id": "anim1", "objectId": "node1", "type": "fade", "start": 0.5, "end": 1.5, "params": {"opacity": 1}, "narrative": "According to Bernoulli, as fluid velocity increases..."},
+        {"id": "anim2", "objectId": "arrow1", "type": "fade", "start": 1.5, "end": 2, "params": {"opacity": 1}},
+        {"id": "anim3", "objectId": "node2", "type": "fade", "start": 2, "end": 3, "params": {"opacity": 1}, "narrative": "The pressure within that fluid decreases."},
+        {"id": "anim4", "objectId": "arrow2", "type": "fade", "start": 3, "end": 3.5, "params": {"opacity": 1}},
+        {"id": "anim5", "objectId": "node3", "type": "fade", "start": 3.5, "end": 4.5, "params": {"opacity": 1}, "narrative": "This pressure difference creates an upward lift force."},
+        {"id": "anim6", "objectId": "img_wing", "type": "scale", "start": 5, "end": 6, "params": {"scale": 1.05}, "narrative": "This is the fundamental principle behind how airplane wings generate lift."}
     ]
 }
 
@@ -1262,6 +1298,10 @@ TEMPLATES.update(GENERATED_TEMPLATES)
 
 # --- 2. ROUTES ---
 
+@app.route('/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('public', filename)
+
 @app.route('/')
 def home():
     return send_from_directory('public', 'home.html')
@@ -1506,6 +1546,8 @@ def generate_scenes():
         return jsonify(TEMPLATE_MITOSIS)
     elif 'electrolysis' in description:
         return jsonify(TEMPLATE_ELECTROLYSIS)
+    elif 'bernoulli' in description or 'fluid' in description or 'lift' in description or 'airfoil' in description:
+        return jsonify(TEMPLATE_BERNOULLI)
     elif 'atom' in description or 'science' in description or 'scientific' in description or 'electron' in description:
         if 'photosynthesis' in description or 'plant' in description:
             return jsonify(TEMPLATE_PHOTOSYNTHESIS)

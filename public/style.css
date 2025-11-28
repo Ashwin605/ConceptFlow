@@ -38,6 +38,7 @@ body {
     gap: 2rem;
     border-bottom: 1px solid var(--border-color);
     height: 70px;
+    width: 100%;
 }
 
 .logo-area {
@@ -64,6 +65,13 @@ body {
     font-weight: 700;
     color: white;
     letter-spacing: -0.5px;
+}
+
+.header-actions {
+    margin-left: auto !important;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
 
 /* Search Bar Area */
