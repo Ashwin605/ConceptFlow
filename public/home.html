@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConceptFlow - AI Animation Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <nav class="top-bar" style="justify-content: space-between;">
+            <h1>ConceptFlow</h1>
+            <div>
+                <a href="/login" class="sm-btn" style="text-decoration: none; margin-right: 1rem;">Log In</a>
+                <a href="/signup" class="primary-btn" style="text-decoration: none;">Sign Up</a>
+            </div>
+        </nav>
+
+        <div class="main-content" style="display: block;">
+            <div class="landing-hero" style="text-align: center; padding-top: 4rem;">
+                <h1 class="hero-title" style="font-size: 3.5rem; margin-bottom: 1.5rem; line-height: 1.2;">
+                    Turn Text into <br>
+                    <span
+                        style="color: var(--primary); background: linear-gradient(to right, #00d2ff, #3a7bd5); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                        Educational Animations
+                    </span>
+                </h1>
+                <p class="hero-desc"
+                    style="font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2.5rem;">
+                    Visualize algorithms, math formulas, and scientific concepts instantly.
+                    Just type what you want to see, and our AI generates a beautiful, narrated animation.
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <a href="/signup" class="primary-btn"
+                        style="text-decoration: none; font-size: 1.1rem; padding: 1rem 3rem;">Start Creating for
+                        Free</a>
+                    <a href="#" class="sm-btn"
+                        style="text-decoration: none; font-size: 1.1rem; padding: 1rem 3rem; background: transparent; border: 1px solid var(--glass-border); color: white;">View
+                        Gallery</a>
+                </div>
+
+                <div style="margin-top: 4rem; position: relative;">
+                    <div
+                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 300px; background: var(--primary); filter: blur(100px); opacity: 0.2; z-index: -1;">
+                    </div>
+                    <img src="https://placehold.co/800x450/1e1e2e/FFF?text=Animation+Preview" alt="App Preview"
+                        style="border-radius: 16px; border: 1px solid var(--glass-border); box-shadow: var(--shadow); width: 100%; max-width: 800px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
